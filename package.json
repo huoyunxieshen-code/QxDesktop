@@ -1,0 +1,59 @@
+{
+  "name": "desktop-harbor",
+  "version": "1.0.20",
+  "private": true,
+  "description": "QX桌面：桌面接管、文件分区、日历、便签和内嵌网页",
+  "author": "Desktop Harbor",
+  "main": "src/main.cjs",
+  "scripts": {
+    "start": "node scripts/build-native.cjs && electron .",
+    "dev": "node scripts/build-native.cjs && electron .",
+    "preview": "node scripts/preview.cjs",
+    "test": "node --test tests/core.test.cjs tests/windows.test.cjs",
+    "test:ui": "node scripts/build-native.cjs && node tests/ui.cjs",
+    "test:shortcuts": "node scripts/build-native.cjs && node tests/shortcuts.cjs",
+    "build": "node scripts/build.cjs"
+  },
+  "devDependencies": {
+    "electron": "45.1.0",
+    "electron-builder": "26.18.0",
+    "playwright": "1.64.1"
+  },
+  "build": {
+    "appId": "local.desktop.harbor",
+    "productName": "QX桌面",
+    "artifactName": "QX桌面-${version}-便携版.${ext}",
+    "electronDist": "node_modules/electron/dist",
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "src/**/*",
+      "package.json"
+    ],
+    "extraResources": [
+      {
+        "from": "assets/QXDesktopBridge.exe",
+        "to": "native/QXDesktopBridge.exe"
+      }
+    ],
+    "asar": true,
+    "win": {
+      "target": [
+        {
+          "target": "portable",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "icon": "assets/icon.ico",
+      "signExecutable": false
+    },
+    "portable": {
+      "requestExecutionLevel": "user",
+      "unpackDirName": "qx-desktop-1.0.20",
+      "useZip": true
+    }
+  }
+}

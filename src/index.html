@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'none'; object-src 'none'; base-uri 'none'; frame-src 'none'">
+  <title>QX桌面 · 给每一份灵感一个位置</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="renderer.js" defer></script>
+</head>
+<body>
+  <svg class="svg-defs" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs>
+    <symbol id="i-grid" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="2"/><rect x="14" y="3" width="7" height="7" rx="2"/><rect x="3" y="14" width="7" height="7" rx="2"/><rect x="14" y="14" width="7" height="7" rx="2"/></symbol>
+    <symbol id="i-folder" viewBox="0 0 24 24"><path d="M3 7a2 2 0 0 1 2-2h5l2 3h7a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z"/></symbol>
+    <symbol id="i-file" viewBox="0 0 24 24"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9Z"/><path d="M14 3v6h6M8 13h8M8 17h5"/></symbol>
+    <symbol id="i-image" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8" cy="8" r="1.5"/><path d="m21 15-5-5L5 21"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 4.5 4.5"/></symbol>
+    <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 3v12m-5-5 5 5 5-5M4 16v4h16v-4"/></symbol>
+    <symbol id="i-chevron" viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></symbol>
+    <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><ellipse cx="12" cy="12" rx="4" ry="9"/><path d="M3 12h18"/></symbol>
+    <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M20 7v5h-5M4 17v-5h5M6 6a8 8 0 0 1 13 2M5 16a8 8 0 0 0 13 2"/></symbol>
+    <symbol id="i-external" viewBox="0 0 24 24"><path d="M14 3h7v7m0-7L10 14M10 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-5"/></symbol>
+    <symbol id="i-home" viewBox="0 0 24 24"><path d="m3 10 9-7 9 7M5 9v12h14V9M9 21v-8h6v8"/></symbol>
+    <symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M7 3v5m10-5v5M3 11h18M8 15h1m6 0h1m-8 3h1"/></symbol>
+    <symbol id="i-note" viewBox="0 0 24 24"><path d="M20 13V5a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h6Zm0 0h-6v8M8 8h8M8 12h3"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path d="m6 6 12 12M6 18 18 6"/></symbol>
+    <symbol id="i-more" viewBox="0 0 24 24"><circle cx="5" cy="12" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></symbol>
+    <symbol id="i-settings" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="m9 3 1-1h4l1 3 3 1 3 3-1 3 1 3-3 3-3 1-1 3h-4l-1-3-3-1-3-3 1-3-1-3 3-3Z"/></symbol>
+    <symbol id="i-expand" viewBox="0 0 24 24"><path d="M9 4H4v5M15 4h5v5M9 20H4v-5M15 20h5v-5"/></symbol>
+    <symbol id="i-collapse" viewBox="0 0 24 24"><path d="M4 9h5V4M20 9h-5V4M4 15h5v5M20 15h-5v5"/></symbol>
+  </defs></svg>
+  <header class="titlebar">
+    <div class="brand"><img class="brand-mark" src="icon.png" alt="" width="29" height="29" draggable="false"><strong>QX桌面</strong><span class="brand-divider"></span><span class="brand-subtitle">让桌面井然，让灵感有处安放</span></div>
+    <div class="title-right"><span class="local-badge"><span></span> 本地工作空间</span><div class="window-controls"><button id="minimize" title="最小化" aria-label="最小化">—</button><button id="maximize" title="最大化 / 还原" aria-label="最大化或还原">□</button><button id="close" title="关闭并退出" aria-label="关闭并退出"><svg><use href="#i-close"/></svg></button></div></div>
+  </header>
+  <div class="app-shell">
+    <aside class="rail"><label class="search-box"><svg><use href="#i-search"/></svg><input id="search" type="search" placeholder="搜索文件或分区" aria-label="搜索文件或分区" autocomplete="off"><kbd>Ctrl F</kbd></label><button class="button primary rail-import" id="import-desktop" title="导入桌面文件"><svg><use href="#i-download"/></svg>导入桌面</button><div class="rail-label">任务栏应用</div><nav class="app-dock" id="app-dock" aria-label="任务栏应用"><span class="dock-empty">应用</span></nav><div class="rail-bottom"><button class="rail-button rail-settings" id="help-button" title="设置与数据位置" aria-label="设置与数据位置"><span class="rail-settings-icon"><svg><use href="#i-settings"/></svg></span><span class="rail-settings-label">设置与数据位置</span></button></div></aside>
+    <main class="workspace">
+      <div class="dashboard">
+        <section class="left-column">
+          <section class="organizer" aria-label="文件分类区"><div class="section-heading"><h2>文件分区 <span id="file-count" class="count-label">0 个文件</span></h2><button class="text-button" id="add-category"><svg><use href="#i-plus"/></svg>新建分区</button></div><div id="categories" class="category-grid"></div></section>
+        </section>
+        <aside class="right-column">
+          <section class="calendar-panel panel" aria-label="日历区"><div class="calendar-top"><div><div class="eyebrow">TODAY IS A GOOD DAY</div><div class="clock" id="clock">00:00<span>00</span></div><div id="today-label" class="today-label"></div></div><div class="date-tile"><span id="tile-month"></span><strong id="tile-day"></strong></div></div><div class="calendar-divider"></div><div class="calendar-navigation"><h2 id="calendar-month"></h2><div><button class="icon-button" id="calendar-prev" title="上个月" aria-label="上个月"><svg class="rotate"><use href="#i-chevron"/></svg></button><button class="today-button" id="calendar-today">今天</button><button class="icon-button" id="calendar-next" title="下个月" aria-label="下个月"><svg><use href="#i-chevron"/></svg></button></div></div><div class="weekdays"><span>一</span><span>二</span><span>三</span><span>四</span><span>五</span><span>六</span><span>日</span></div><div id="calendar-days" class="calendar-days"></div><div class="calendar-bottom"><span class="tiny-dot"></span><span id="selected-date"></span></div></section>
+          <section class="notes-panel panel" aria-label="便签区"><div class="notes-heading"><div class="panel-title"><span class="mini-icon amber"><svg><use href="#i-note"/></svg></span><h2>灵感便签</h2></div><button class="icon-button" id="add-note" title="新建便签" aria-label="新建便签"><svg><use href="#i-plus"/></svg></button></div><div id="note-tabs" class="note-tabs"></div><div class="note-paper"><input id="note-title" maxlength="60" aria-label="便签标题" placeholder="便签标题"><textarea id="note-content" aria-label="便签内容" placeholder="把想法轻轻放在这里…&#10;&#10;今天要做的事，&#10;忽然闪过的灵感，&#10;或一句想记住的话。" maxlength="1000000" spellcheck="false"></textarea></div><div class="note-footer"><span id="note-save-status"><svg><use href="#i-check"/></svg>已保存到本机</span><button class="text-button muted" id="delete-note">删除此页</button></div></section>
+          <section class="browser-panel panel" aria-label="应用与网页空间"><div class="browser-heading"><div class="panel-title"><span class="mini-icon blue"><svg><use href="#i-globe"/></svg></span><h2>应用空间</h2><span class="subtle-label">拖入左侧应用，自动新增标签</span></div><div class="browser-actions"><button class="icon-button" id="browser-expand" title="展开应用空间（Esc 还原）" aria-label="展开应用空间"><svg><use href="#i-expand"/></svg></button><button class="icon-button" id="browser-external" title="在系统浏览器中打开" aria-label="在系统浏览器中打开"><svg><use href="#i-external"/></svg></button></div></div><div class="embed-tabs"><div class="embed-tab-list" id="embed-tab-list" role="tablist" aria-label="网页与应用标签"></div><button type="button" class="embed-add" id="embed-add" title="把左侧应用拖到这里，或点击选择应用" aria-label="选择要内嵌的应用"><svg><use href="#i-plus"/></svg></button></div><form id="browser-form" class="browser-toolbar"><button type="button" id="browser-back" class="icon-button" title="后退" aria-label="网页后退" disabled><svg class="rotate"><use href="#i-chevron"/></svg></button><button type="button" id="browser-forward" class="icon-button" title="前进" aria-label="网页前进" disabled><svg><use href="#i-chevron"/></svg></button><button type="button" id="browser-reload" class="icon-button" title="刷新网页" aria-label="刷新网页"><svg><use href="#i-refresh"/></svg></button><label class="address-box"><svg><use href="#i-globe"/></svg><input id="browser-address" placeholder="输入网址，按 Enter 在此打开" aria-label="网页地址" spellcheck="false" autocomplete="off"></label><button type="submit" class="button browser-go">打开</button><button type="button" id="browser-home" class="icon-button" title="关闭网页并返回起始页" aria-label="关闭网页并返回起始页"><svg><use href="#i-home"/></svg></button></form><div id="browser-error" class="browser-error" role="alert" hidden></div><div id="browser-viewport" class="browser-viewport"><div class="web-welcome" id="web-welcome"><h3>常用网页，就在手边</h3><p>打开你的工作台、在线文档或喜欢的网站<br>让灵感和效率，在同一个空间相遇。</p><button id="start-browsing" class="text-button">输入网址，开启网页空间 <svg><use href="#i-chevron"/></svg></button></div></div><div id="native-viewport" class="native-viewport" hidden><div class="native-placeholder"><span class="tiny-dot"></span>应用内容正在这里显示</div></div><div class="browser-footer"><div class="browser-zoom"><button type="button" class="zoom-button" id="browser-zoom-out" title="缩小网页" aria-label="缩小网页">－</button><button type="button" class="zoom-button" id="browser-zoom-reset" title="恢复 100%" aria-label="恢复网页默认大小">100%</button><button type="button" class="zoom-button" id="browser-zoom-in" title="放大网页" aria-label="放大网页">＋</button></div></div><div id="embed-drop" class="embed-drop" hidden><strong>松手，作为新标签内嵌到这里</strong><span>关闭标签即可恢复原应用窗口</span></div></section>
+        </aside>
+      </div>
+    </main>
+  </div>
+  <dialog id="settings" class="settings-dialog" aria-labelledby="settings-title"><div class="modal-heading"><h2 id="settings-title">设置</h2><button type="button" class="icon-button" id="settings-close" aria-label="关闭设置"><svg><use href="#i-close"/></svg></button></div><h3>数据保存位置</h3><p class="settings-description">保存文件分区、文件入口和便签；更改后立即生效。</p><p id="data-directory" class="data-directory"></p><div class="settings-actions"><button type="button" class="button" id="settings-open-directory">打开文件夹</button><button type="button" class="button primary" id="change-data-directory">更改保存位置</button></div><p class="settings-description">切换时复制现有工作区数据，保留原目录副本，不覆盖目标已有数据。原桌面文件不会移动；网页登录资料仍保存在系统应用目录。</p><h3>任务栏应用</h3><p id="taskbar-status" class="settings-description">左侧显示应用入口；仅隐藏底部应用图标，保留开始、搜索、托盘和时钟。最小化时任务栏只保留 QX桌面，退出时完全恢复。</p><h3>开机自启动</h3><p id="autostart-status" class="settings-description">登录 Windows 后自动打开 QX桌面；便携版使用原始 EXE 路径。</p><label class="settings-check"><input type="checkbox" id="autostart-toggle">登录 Windows 时自动启动 QX桌面</label><h3>使用与备份</h3><p class="settings-description">文件双击打开、右键管理；便签自动保存。关闭 QX 后可复制数据目录备份；关闭时退出所有应用组件并恢复原桌面及任务栏。</p></dialog>
+  <div id="toast" class="toast" role="status" hidden></div>
+  <div id="context-menu" class="context-menu" role="menu" hidden></div>
+  <dialog id="modal"><form id="modal-form"><div class="modal-heading"><h2 id="modal-title"></h2><button type="button" class="icon-button" id="modal-close" aria-label="关闭对话框"><svg><use href="#i-close"/></svg></button></div><p id="modal-description"></p><input id="modal-input" class="modal-input" maxlength="24" aria-label="分区名称" hidden><div id="modal-details" class="modal-details" hidden></div><div class="modal-actions"><button type="button" id="modal-secondary" class="button">取消</button><button type="submit" id="modal-confirm" class="button primary">确定</button></div></form></dialog>
+</body>
+</html>

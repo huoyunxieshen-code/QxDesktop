@@ -1,0 +1,10 @@
+# 依赖
+node_modules/
+
+# 打包产物（便携版 EXE 超过 GitHub 100 MB 限制，请通过 Releases 分发）
+release/
+
+# 测试与运行缓存
+tests/__pycache__/
+*.log
+*.tmp
