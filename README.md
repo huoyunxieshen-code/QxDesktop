@@ -37,13 +37,6 @@ npm run build
 
 打包结果：`release/QX桌面-1.0.20-便携版.exe`（约 150 MB，无需安装）。
 
-如需对外发布，可把 EXE 上传到 GitHub Releases（仓库本身不存放构建产物）：
-
-```bash
-gh release create v1.0.20 "release/QX桌面-1.0.20-便携版.exe" \
-  --title "QX桌面 1.0.20" --notes "更新说明"
-```
-
 发布新版本时，请同时修改 `package.json` 中的 `version` 和 `build.portable.unpackDirName`，避免解压目录复用旧组件。
 
 ---
