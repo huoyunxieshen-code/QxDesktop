@@ -14,6 +14,40 @@
 
 ---
 
+## 打包方法与步骤
+
+> 仓库只保存源码，`release/` 构建产物不会提交到 Git（便携版 EXE 超过 GitHub 单文件限制）。请按下面步骤自行打包，或从项目的 GitHub Releases 获取已发布的版本。
+
+环境要求：Windows 10 / 11 x64、Node.js 24；原生组件使用 .NET Framework 自带的 `csc.exe` 编译。
+
+```bash
+# 1. 安装依赖
+npm install
+
+# 2. 编译原生组件并启动开发版（可选，用于本地调试）
+npm start
+
+# 3. 运行测试（可选）
+npm test
+npm run test:ui
+
+# 4. 打包便携版
+npm run build
+```
+
+打包结果：`release/QX桌面-1.0.20-便携版.exe`（约 150 MB，无需安装）。
+
+如需对外发布，可把 EXE 上传到 GitHub Releases（仓库本身不存放构建产物）：
+
+```bash
+gh release create v1.0.20 "release/QX桌面-1.0.20-便携版.exe" \
+  --title "QX桌面 1.0.20" --notes "更新说明"
+```
+
+发布新版本时，请同时修改 `package.json` 中的 `version` 和 `build.portable.unpackDirName`，避免解压目录复用旧组件。
+
+---
+
 ## 设计理念
 
 | 原则 | 说明 |
@@ -50,9 +84,9 @@
 
 ## 使用指南
 
-### 1. 启动
+### 1. 获取与运行
 
-1. 下载 `release/QX桌面.exe`。
+1. 从项目的 GitHub Releases 获取 `QX桌面-1.0.20-便携版.exe`，或按上方「打包方法与步骤」自行打包。
 2. 双击运行，无需安装；首次启动会自动导入桌面上的文件入口。
 3. 关闭窗口即退出程序，桌面图标和任务栏恢复原状。
 
@@ -181,28 +215,7 @@ Electron 主进程 (src/main.cjs)
 - 原生桥接只接受应用清单中存在的 ID，拒绝任意路径或窗口句柄，避免被网页内容利用。
 - 应用清单每 1.5 秒刷新；组件异常时自动重启并退避重试，单次失败不会永久停用左侧应用栏。
 
----
-
-## 本地开发
-
-```bash
-# 安装依赖
-npm install
-
-# 开发运行（会先编译原生组件）
-npm start
-
-# 单元测试
-npm test
-
-# UI 集成测试
-npm run test:ui
-
-# 打包便携版到 release/
-npm run build
-```
-
-环境：Node.js 24、Electron 45、electron-builder 26、Playwright 1.64；原生组件由 `csc.exe` 编译 `src/native/*.cs`。
+开发技术栈：Node.js 24、Electron 45、electron-builder 26、Playwright 1.64；原生组件由 `csc.exe` 编译 `src/native/*.cs`。
 
 ---
 
@@ -212,5 +225,3 @@ npm run build
 - AI 生成的代码已通过单元测试（150 项）和 UI 集成测试（78 项），但仍可能存在未知缺陷。
 - 涉及系统任务栏、桌面图标和窗口样式的操作均按「可逆」原则实现，但建议在重要工作中先保存文件，再运行本程序。
 - 软件不提供任何明示或暗示的担保，使用风险由使用者自行承担。
-
-
