@@ -10,6 +10,10 @@
 
 当前版本：**1.0.20**（便携版，无需安装）
 
+**获取程序：** [GitHub Releases](https://github.com/huoyunxieshen-code/QxDesktop/releases/tag/v1.0.20) · [QxDesktop.exe](https://github.com/huoyunxieshen-code/QxDesktop/releases/download/v1.0.20/QxDesktop.exe)（约 150 MB）
+
+> GitHub 不支持中文资源文件名，发布附件实际名为 `QxDesktop.exe`。
+
 ![QX桌面主界面](assets/desktop-home.png)
 
 ---
@@ -79,7 +83,7 @@ npm run build
 
 ### 1. 获取与运行
 
-1. 从项目的 GitHub Releases 获取 `QX桌面-1.0.20-便携版.exe`，或按上方「打包方法与步骤」自行打包。
+1. 从 [GitHub Releases v1.0.20](https://github.com/huoyunxieshen-code/QxDesktop/releases/tag/v1.0.20) 获取 [QxDesktop.exe](https://github.com/huoyunxieshen-code/QxDesktop/releases/download/v1.0.20/QxDesktop.exe)，或按上方「打包方法与步骤」自行打包。
 2. 双击运行，无需安装；首次启动会自动导入桌面上的文件入口。
 3. 关闭窗口即退出程序，桌面图标和任务栏恢复原状。
 
